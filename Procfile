@@ -1,1 +1,1 @@
-web: gunicorn VDshop.wsgi --log-file -
+web: gunicorn trolleybus.wsgi --log-file -
