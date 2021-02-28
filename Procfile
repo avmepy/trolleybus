@@ -1,0 +1,1 @@
+web: gunicorn VDshop.wsgi --log-file -
