@@ -31,9 +31,6 @@ class StopPoint(models.Model):
 class Schedule(models.Model):
     id = models.IntegerField(
         primary_key=True)
-    route = models.ForeignKey(
-        'Route',
-        on_delete=models.DO_NOTHING)
     date = models.TimeField(
         blank=True, null=True)
     stop_point = models.ForeignKey(
