@@ -14,5 +14,5 @@ class TrolleybusView(views.APIView):
         if trolleybus:
             serializer = TrolleybusSerializer(trolleybus.first())
 
-            return serializer.data
+            return Response(serializer.data)
         return Response({'bad': 'bad'})
