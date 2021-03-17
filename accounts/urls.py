@@ -8,7 +8,7 @@ from accounts.views import RegistrationAPIView, LoginAPIView, UserRetrieveUpdate
 app_name = 'accounts'
 
 urlpatterns = [
-    path('user', UserRetrieveUpdateAPIView.as_view()),
+    path('user/', UserRetrieveUpdateAPIView.as_view()),
     path('users/', RegistrationAPIView.as_view()),
     path('users/login/', LoginAPIView.as_view()),
 ]
