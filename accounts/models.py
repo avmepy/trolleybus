@@ -3,6 +3,8 @@ import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from trolleybus.constansts import ROLES
+from main.models import Trolleybus
 
 
 class UserManager(BaseUserManager):
@@ -47,14 +49,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     # which we can use to provide User in the user
     # interface. We will also index this column in the database for
     # improve search speed in the future.
-    username = models.CharField(db_index=True, max_length=255, unique=True)
+    username = models.CharField(db_index=True, max_length=255, unique=True,
+                                verbose_name='Ім\'я користувача')
 
     # We also need a field with which we will be able to
     # contact the user and identify him at login.
     # Since we need the email address anyway, we will also
     # use it for logins, as it is the most
     # the most common form of credentials at the moment.
-    email = models.EmailField(db_index=True, unique=True)
+    email = models.EmailField(db_index=True, unique=True, verbose_name='Електронна пошта')
 
     # When a user no longer wants to use our system, he can
     # want to delete your account. This is a problem for us, since the collected
@@ -74,8 +77,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Timestamp showing when the object was last updated.
     updated_at = models.DateTimeField(auto_now=True)
 
-    # Additional fields required by Django
-    # when specifying a custom user model.
+    role = models.IntegerField(verbose_name='Роль', choices=ROLES, default=0)
+    transport = models.ForeignKey(Trolleybus, blank=True, on_delete=models.DO_NOTHING, default=None, null=True)
+    name = models.CharField(verbose_name='Ім\'я', max_length=50)
+    surname = models.CharField(verbose_name='Прізвище', max_length=50)
 
     # The USERNAME_FIELD property tells us which field we will use
     # to login. In this case, we want to use mail.
