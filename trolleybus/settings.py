@@ -140,4 +140,3 @@ REST_FRAMEWORK = {
         'apps.accounts.backends.JWTAuthentication',
     ),
 }
-
