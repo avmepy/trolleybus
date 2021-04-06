@@ -18,6 +18,12 @@ def is_manager(user):
 
 
 def login_user(request, form):
+    """
+    login view
+    :param request:
+    :param form:
+    :return:
+    """
     cd = form.cleaned_data
     user = authenticate(username=cd['username'], password=cd['password'])
     if user is not None:
