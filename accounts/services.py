@@ -32,8 +32,11 @@ def login_user(request, form):
 
             if is_admin(request.user):
                 return redirect('admin:index')
-            else:
+            elif is_driver(request.user) or is_manager(request.user):
                 return redirect('home')
+            else:  # for superuser now
+                # todo error
+                return redirect('admin:index')
         else:
             return HttpResponse('Disabled account')
     else:
