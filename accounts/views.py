@@ -24,3 +24,11 @@ class LogoutView(View):
 
     def get(self, request):
         return services.logout_user(self.request)
+
+
+class ProfileView(View):
+
+    def get(self):
+
+        return render(self.request, 'accounts/profile.html')
+

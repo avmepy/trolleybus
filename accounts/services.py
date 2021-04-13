@@ -3,6 +3,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from accounts.models import Profile
 
 
 def is_driver(user):
@@ -46,3 +47,11 @@ def login_user(request, form):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+def get_user_profile(user):
+
+    assert is_driver(user), 'user is not a driver'
+
+    profile = Profile.objects.get(user=user)
+    return profile

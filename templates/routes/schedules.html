@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block context %}
+
+    {% for schedule in schedules %}
+
+        <p>{{ schedule.route }}</p>
+        <p>{{ schedule.cruise_number }}</p>
+
+        {% for stop in schedule.scheduled_stops.all %}
+
+            <p>{{ stop.stop }}  {{ stop.time }}</p>
+
+
+        {% endfor %}
+
+    {% endfor %}
+
+{% endblock context %}
