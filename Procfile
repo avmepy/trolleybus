@@ -1,1 +1,1 @@
-web: gunicorn trolleybus2.wsgi:application --log-file
+web: gunicorn trolleybus2.wsgi --log-file
