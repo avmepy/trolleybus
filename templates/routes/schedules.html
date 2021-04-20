@@ -9,12 +9,17 @@
 
     {% for shift in shifts %}
 
-        <p>{{ shift.date }}</p>
+        <p> shift {{ shift.shift.kind }} {{ shift.date }}</p>
         <p>from {{ shift.shift_kind.start_time }} till {{ shift.shift_kind.end_time}}</p>
+        <p>Schedules:</p>
 
-        {% for schedule in schedules %}
+        {% for schedule in shift.schedules.all %}
 
             <p>{{ schedule.route.name }} from {{ schedule.start_time }} till {{ schedule.end_time }}</p>
+
+            {% empty %}
+
+            empty list
 
             {% for stop in schedule.scheduled_stops %}
 
