@@ -13,7 +13,8 @@ class Condition(models.Model):
 class Transport(models.Model):
 
     reg_plate = models.CharField(verbose_name="Автомобільний номер", max_length=10)
-    condition = models.CharField(verbose_name="Стан", max_length=1000, blank=True, default="ok")
+    # condition = models.CharField(verbose_name="Стан", max_length=1000, blank=True, default="ok")
+    condition = models.ForeignKey(Condition, on_delete=models.DO_NOTHING)
     mileage = models.IntegerField(verbose_name="Пробіг (тис. км)", blank=True)
 
     def __str__(self):
