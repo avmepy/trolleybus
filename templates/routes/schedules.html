@@ -16,17 +16,20 @@
         {% for schedule in shift.schedules.all %}
 
             <p>{{ schedule.route.name }} from {{ schedule.start_time }} till {{ schedule.end_time }}</p>
+                {% for stop in schedule.scheduled_stops.all %}
+
+                <p>{{ stop.stop }}  {{ stop.time }}</p>
+
+                {% empty %}
+
+                ypu have no stop
+                {% endfor %}
 
             {% empty %}
 
-            empty list
-
-            {% for stop in schedule.scheduled_stops %}
-
-            <p>{{ stop.stop }}  {{ stop.time }}</p>
+            you have no schedule
 
 
-            {% endfor %}
 
         {% endfor %}
 
