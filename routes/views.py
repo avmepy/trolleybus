@@ -13,8 +13,11 @@ class HomeView(View):
 class ScheduleView(View):
 
     def get(self, request):
-        schedules = services.get_user_schedules(self.request.user)
+
+        shifts, schedules = services.get_user_shifts_and_schedules(self.request.user)
+
         context = {
+            'shifts': shifts,
             'schedules': schedules
         }
         return render(self.request, 'routes/schedules.html', context=context)

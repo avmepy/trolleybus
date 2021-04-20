@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*-encoding: utf-8-*-
 from django.contrib.auth.models import User
-from accounts.models import Profile
+from routes.models import Shift, Schedule
 
 
-def get_user_schedules(user: User):
+def get_user_shifts_and_schedules(user: User) -> tuple:
 
-    profile = Profile.objects.get(user=user)
-    schedules = profile.schedules.all()
-
-    # print(schedules, type(schedules))
-
-    return schedules
+    shifts = Shift.objects.filter(driver=user)
+    schedules = []
+    for shift in shifts:
+        schedules += list(shift.schedules)
+    print(schedules)
+    return shifts, schedules

@@ -36,16 +36,16 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Головна</a>
                         </li>
 
                         {% if request.user|has_group:"Водій" %}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'schedules' %}">Schedules</a>
+                            <a class="nav-link" href="{% url 'schedules' %}">Мої зміни</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'reports' %}">Reports</a>
+                            <a class="nav-link" href="{% url 'reports' %}">Звіти</a>
                         </li>
 
                         {% endif %}
@@ -53,22 +53,10 @@
                         {% if request.user|has_group:"Керівник" %}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'reports' %}">Reports</a>
+                            <a class="nav-link" href="{% url 'reports' %}">Звіти</a>
                         </li>
 
                         {% endif %}
-
-
-
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" aria-current="page" href="#">Home</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{% url 'schedules' %}">Schedules</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{% url 'reports' %}">Reports</a>#}
-{#                    </li>#}
 
                     {% endif %}
 
