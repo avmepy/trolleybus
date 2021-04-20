@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from routes import services
-from accounts.services import is_driver, is_manager, get_drivers
-from django.core.exceptions import PermissionDenied
+from accounts.services import get_drivers
 
 
 class HomeView(View):
@@ -30,4 +29,7 @@ class ReportView(View):
         return render(self.request, 'routes/reports.html', context=context)
 
     def post(self, request):
-        return render(self.request, 'routes/reports.html')
+        context = {
+            'drivers': get_drivers()
+        }
+        return render(self.request, 'routes/reports.html', context=context)

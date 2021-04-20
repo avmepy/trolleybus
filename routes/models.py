@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -32,7 +33,29 @@ class Schedule(models.Model):
 
     route = models.ForeignKey(Route, on_delete=models.CASCADE)
     cruise_number = models.IntegerField(verbose_name="Номер рейсу")
+    start_time = models.TimeField(verbose_name="Початок рейсу", blank=True)
+    end_time = models.TimeField(verbose_name="Кінець рейсу", blank=True)
     scheduled_stops = models.ManyToManyField(ScheduledStop)
 
     def __str__(self):
         return f"Schedule #{self.cruise_number} route {self.route}"
+
+
+class ShiftKinds(models.Model):
+
+    number = models.IntegerField(verbose_name="Номер зміни")
+    start_time = models.TimeField(verbose_name="Початок зміни")
+    end_time = models.TimeField(verbose_name="Кінець зміни")
+
+    def __str__(self):
+        return f"Kind shift {self.number} from {self.start_time} till {self.end_time}"
+
+
+class Shift(models.Model):
+
+    driver = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    shift_kind = models.ForeignKey(ShiftKinds, on_delete=models.DO_NOTHING)
+    scheduled = models.ManyToManyField(Schedule)
+
+    def __str__(self):
+        return f"Shift {self.shift_kind} {self.driver}"
