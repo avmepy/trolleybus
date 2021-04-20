@@ -7,9 +7,10 @@ from routes.models import Shift, Schedule
 def get_user_shifts_and_schedules(user: User) -> tuple:
 
     shifts = Shift.objects.filter(driver=user)
+    # shifts.filter()
     # schedules = Schedule.objects.filter('')
     schedules = []
     for shift in list(shifts):
-        schedules += list(shift.schedules.all())
+        schedules += shift.schedules.all()
     print(schedules)
     return shifts, schedules
