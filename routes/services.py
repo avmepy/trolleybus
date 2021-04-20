@@ -11,6 +11,6 @@ def get_user_shifts_and_schedules(user: User) -> tuple:
     # schedules = Schedule.objects.filter('')
     schedules = []
     for shift in shifts:
-        schedules += shift.schedules.all()
+        schedules += [shift.schedules.all()]
     print(schedules)
     return shifts, schedules
