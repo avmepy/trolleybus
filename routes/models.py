@@ -55,7 +55,8 @@ class Shift(models.Model):
 
     driver = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     shift_kind = models.ForeignKey(ShiftKinds, on_delete=models.DO_NOTHING)
-    scheduled = models.ManyToManyField(Schedule)
+    date = models.DateField(verbose_name="Дата")
+    schedules = models.ManyToManyField(Schedule)
 
     def __str__(self):
         return f"Shift {self.shift_kind} {self.driver}"
