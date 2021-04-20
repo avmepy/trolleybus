@@ -8,7 +8,7 @@ def get_user_shifts_and_schedules(user: User) -> tuple:
 
     shifts = Shift.objects.filter(driver=user)
     schedules = []
-    for shift in shifts:
+    for shift in list(shifts):
         schedules += list(shift.schedules)
     print(schedules)
     return shifts, schedules
