@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*-encoding: utf-8-*-
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from accounts.models import Profile
@@ -27,6 +28,7 @@ def login_user(request, form):
     """
     cd = form.cleaned_data
     user = authenticate(username=cd['username'], password=cd['password'])
+    print(user)
     if user is not None:
         if user.is_active:
             login(request, user)
@@ -55,3 +57,7 @@ def get_user_profile(user):
 
     profile = Profile.objects.get(user=user)
     return profile
+
+
+def get_drivers():
+    return User.objects.filter(groups__name='Водій')

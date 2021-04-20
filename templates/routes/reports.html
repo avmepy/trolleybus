@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+{% block title %}
+    Reports
+{% endblock title %}
+
+{% block context %}
+
+    <form action="{% url 'reports' %}" method="post">
+
+        {% csrf_token %}
+
+        {% if request.user|has_group:"Водій" %}
+
+            <label for="reportType">Оберіть звіт</label>
+
+            <select class="form-select" aria-label="Default select example" id="reportType" name="report">
+                <option selected value="salary">Зарплатня</option>
+                <option value="hours">Відпрацьовані години</option>
+            </select>
+
+        {% endif %}
+
+        {% if request.user|has_group:"Керівник" %}
+
+        <label for="reportType">Оберіть звіт</label>
+        <select class="form-select" aria-label="Default select example" id="reportType" name="report">
+            <option selected value="salary">Зарплатня</option>
+            <option value="hours">Відпрацьовані години</option>
+        </select>
+
+        <label for="driver">Оберіть водія</label>
+        <select class="form-select" aria-label="Default select example" id="driver" name="driver">
+            <option selected value="salary">Усі водії</option>
+
+            {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.get_full_name }}</option>
+            {% endfor %}
+
+
+        </select>
+
+        {% endif %}
+
+        <p>Оберіть проміжок часу</p>
+        <input type="date" name="from">
+        <input type="date" name="to">
+        <input type="submit" value="Завантажити">
+
+
+
+    </form>
+
+
+{% endblock context %}

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import django_heroku
+# import django_heroku
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY='f@7sbvvqbv@87^aclkzw5h6y01+4k)$5$twd!@7lc9!&b=a7%0'
+SECRET_KEY = 'f@7sbvvqbv@87^aclkzw5h6y01+4k)$5$twd!@7lc9!&b=a7%0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG')
@@ -133,5 +133,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

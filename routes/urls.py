@@ -3,10 +3,11 @@
 
 
 from django.urls import path
-from routes.views import HomeView, ScheduleView
+from routes.views import HomeView, ScheduleView, ReportView
 
 
 urlpatterns = [
     path('home/', HomeView.as_view(), name='home'),
-    path('schedules/', ScheduleView.as_view(), name='schedules')
+    path('schedules/', ScheduleView.as_view(), name='schedules'),
+    path('reports/', ReportView.as_view(), name='reports'),
 ]
