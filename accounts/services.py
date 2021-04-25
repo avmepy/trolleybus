@@ -28,7 +28,7 @@ def login_user(request, form):
     """
     cd = form.cleaned_data
     user = authenticate(username=cd['username'], password=cd['password'])
-    print(user)
+    # print(user)
     if user is not None:
         if user.is_active:
             login(request, user)

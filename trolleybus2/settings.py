@@ -82,10 +82,21 @@ WSGI_APPLICATION = 'trolleybus2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd8c4u69vf9f8dt',
+        'USER': 'uicsbbyiqkzhce',
+        'PASSWORD': 'b4c8eb3053a6fc8f520a2040a07a0aae05ebd148d8197e14b57e4544161b17fa',
+        'HOST': 'ec2-54-87-34-201.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
