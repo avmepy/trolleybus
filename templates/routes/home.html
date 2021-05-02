@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-    Home
+    Головна
 {% endblock title %}
 
 
 {% block context %}
+    <div class="d-flex justify-content-center">
+        <img src="{% static 'img/trolleybus.jpeg' %}" alt="" class="wh-100 f-sepia about-img">
+    </div>
+    <div class="text-center about-text">
+        TrolleyBus — сервіс, що надає інформацію про всі маршрути та зупинки громадського транспорту в Києві для водіїв громадського транспорту.
+        <br>Сервіс допоможе зорієнтувати водія, відповідно до актуальних умов праці та відповідно до розкладу руху, вести моніторинг маршрутів з урахуванням фінансових та часових затрат.
+    </div>
+    {% if not request.user.is_authenticated %}
+        <div class="d-flex justify-content-center">
+            <a role="button" class="btn btn-light login-button " href="{% url 'login' %}">Увійти</a>
+        </div>
+    {% endif %}
 
-<h1>Home page</h1>
 
 
 {% endblock context%}
