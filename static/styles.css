@@ -1,16 +1,27 @@
 body {
-    background: url('img/bg.jpg') no-repeat;
+    background: url('img/bg.jpg') no-repeat fixed;
     background-size: auto;
 }
 
 a {
     text-decoration: unset;
 }
+.mlr-6p{
+    margin: 0 6%;
+}
+.mt-15{
+    margin-top: 15px;
+}
+.mw-90p {
+    max-width: 90%;
+}
 
 .w-90p {
     width: 90%;
 }
-
+.br-20{
+    border-radius: 20px;
+}
 .bg-black {
     background-color: black;
     opacity: 70%;
@@ -18,7 +29,13 @@ a {
 .color-white {
     color: white;
 }
-
+.pos-rel{
+    position: relative;
+}
+.stop-time{
+    position: absolute;
+    right: 0;
+}
 .bg-header {
     background-color: black;
     opacity: 70%;
@@ -73,6 +90,34 @@ a {
     margin-top: -85px;
 }
 
+.shift-card {
+    background-color: #ffeeba;
+    border-radius: 20px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #423211;
+    border-color: #423211;
+    border-radius: 20px;
+}
+.btn-primary:hover{
+    background-color: #968367;
+    border-color: #968367;
+}
+.btn-primary:focus, .btn-primary:active, .btn-primary:active:focus {
+    background-color: #968367;
+    border-color: #968367;
+    box-shadow: 0 0 0 0.25rem rgb(116 88 21 / 45%);
+}
+.accordion-flush .accordion-item, .accordion-flush .accordion-item .accordion-button {
+    border-radius: 20px;
+}
+.accordion-item {
+    margin-top: 15px;
+}
+.accordion-item:first-of-type .accordion-button, .accordion-item:last-of-type .accordion-button.collapsed{
+    border-radius: 20px;
+}
 @media (min-width: 1250px) {
     .about-img {
         margin: 30px 18%;
@@ -90,6 +135,9 @@ a {
     .wh-100 {
         width: 100%;
         height: 100%;
+    }
+    .accordion-width {
+        width: 60%;
     }
 }
 
@@ -110,5 +158,14 @@ a {
         padding: 19px;
         margin: 0 5%;
         box-shadow: 2px 3px 16px black;
+    }
+    .accordion-width {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    .accordion-width {
+        width: 100%;
     }
 }

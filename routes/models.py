@@ -8,7 +8,7 @@ class Stop(models.Model):
     address = models.CharField(verbose_name="Адреса", max_length=50, blank=True)
 
     def __str__(self):
-        return f"Stop {self.name}"
+        return f"зуп. {self.name}"
 
 
 class ScheduledStop(models.Model):

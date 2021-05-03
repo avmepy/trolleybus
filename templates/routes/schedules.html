@@ -1,39 +1,123 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Schedules
+    Розклад
 {% endblock title %}
 
 
 {% block context %}
-
-    {% for shift in shifts %}
-
-        <p> shift {{ shift.shift.kind }} {{ shift.date }}</p>
-        <p>from {{ shift.shift_kind.start_time }} till {{ shift.shift_kind.end_time}}</p>
-        <p>Schedules:</p>
-
-        {% for schedule in shift.schedules.all %}
-
-            <p>{{ schedule.route.name }} from {{ schedule.start_time }} till {{ schedule.end_time }}</p>
-                {% for stop in schedule.scheduled_stops.all %}
-
-                <p>{{ stop.stop }}  {{ stop.time }}</p>
-
-                {% empty %}
-
-                ypu have no stop
-                {% endfor %}
-
-            {% empty %}
-
-            you have no schedule
+    <div class="mlr-6p mt-15 d-flex justify-content-center">
 
 
+        <div class="accordion accordion-flush accordion-width" id="accordionFlushExample">
 
-        {% endfor %}
+            {% for shift in shifts %}
+
+                <div class="accordion-item br-20">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed br-20" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Зміна {{ shift.date }} &nbsp;<text style="color: gray"> | {{ shift.shift_kind.start_time }} - {{ shift.shift_kind.end_time}}</text>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            {% for schedule in shift.schedules.all %}
+
+                                <p>
+                                    <b>{{ schedule.route.name }}</b>&nbsp;
+                                    <text style="color: gray"> | {{ schedule.start_time }} - {{ schedule.end_time }}</text>
+                                </p>
 
 
-    {% endfor %}
+                                {% for stop in schedule.scheduled_stops.all %}
+                                    <p class="pos-rel">
+                                        <span>{{ stop.stop }}</span>
+                                        <span class="stop-time">{{ stop.time }}</span>
+                                    </p>
+                                {% empty %}
+                                    you have no stop
+                                {% endfor %}
+                                <hr>
+                            {% empty %}
+
+                                you have no schedule
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                {#                <div class="card shift-card" style="width: 20rem; height: 180px">#}
+                {#                    <div class="card-body">#}
+                {#                        <h5 class="card-title">Зміна {{ shift.date }}</h5>#}
+                {#                        <h6 class="card-subtitle mb-2 text-muted">З {{ shift.shift_kind.start_time }} по {{ shift.shift_kind.end_time}}</h6>#}
+                {#                        <br><br>#}
+                {#                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">#}
+                {#                            Переглянути розклад#}
+                {#                        </button>#}
+                {#                    </div>#}
+                {#                </div>#}
+
+                {##}
+                {#                <p>Зміна {{ shift.date }}</p>#}
+                {#                <p>З {{ shift.shift_kind.start_time }} по {{ shift.shift_kind.end_time}}</p>#}
+                {#                <p>Розклад:</p>#}
+
+                {#                {% for schedule in shift.schedules.all %}#}
+                {##}
+                {#                    <p>{{ schedule.route.name }} from {{ schedule.start_time }} till {{ schedule.end_time }}</p>#}
+                {#                    {% for stop in schedule.scheduled_stops.all %}#}
+                {#                        <p>{{ stop.stop }}  {{ stop.time }}</p>#}
+                {#                    {% empty %}#}
+                {##}
+                {#                        ypu have no stop#}
+                {#                    {% endfor %}#}
+                {##}
+                {#                {% empty %}#}
+                {##}
+                {#                    you have no schedule#}
+                {##}
+                {##}
+                {##}
+                {#                {% endfor %}#}
+
+
+            {% endfor %}
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Accordion Item #2
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Accordion Item #3
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </div>
 
 {% endblock context %}
