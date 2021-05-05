@@ -1,8 +1,10 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from routes import services
 from accounts.services import get_drivers
 from routes import reports
+from openpyxl.writer.excel import save_virtual_workbook
 
 
 class HomeView(View):
@@ -33,16 +35,16 @@ class ReportView(View):
 
     def post(self, request):
 
-        print(self.request.POST)
         report = self.request.POST.get('report')
         date_from = self.request.POST.get('from')
         date_to = self.request.POST.get('to')
-
         context = {
-            'drivers': get_drivers(),
-            # 'errors': False
-            'report': reports.worked_hours(self.request.user, date_from, date_to)
+            'drivers': get_drivers()
         }
+
+        if report == 'hours':
+            wb = reports.report_worked_hours(self.request.user, date_from, date_to)
+            return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
 
         return render(self.request, 'routes/reports.html', context=context)
 
