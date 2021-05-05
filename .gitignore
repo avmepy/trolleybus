@@ -12,3 +12,5 @@
 #Database
 *.sqlite3
 /locals.txt
+/trolleybus2/
+*.env
