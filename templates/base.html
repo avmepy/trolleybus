@@ -47,7 +47,7 @@
 
                         {% if request.user|has_group:"Керівник" %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'reports' %}">Звіти</a>
+                                <a class="nav-link" href="{% url 'reports' %}">Звіти | Керування</a>
                             </li>
                         {% endif %}
                     {% endif %}

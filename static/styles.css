@@ -41,6 +41,19 @@ a {
     opacity: 70%;
 }
 
+.bg-beige {
+    background-color: #fcecdf;
+}
+.h-38 {
+    height: 38px;
+}
+.mw-500 {
+    max-width: 500px;
+}
+.w-100p{
+    width: 100%;
+}
+
 .fs-12 {
     font-size: 12px !important;
 }
@@ -64,6 +77,9 @@ a {
 .color-main-dark{
     color: #574c3a;
 }
+.alert {
+    border-radius: 20px;
+}
 .form-control-brown:focus {
     color: #495057;
     background-color: #fff;
@@ -72,8 +88,10 @@ a {
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 }
 .bc-main-dark {
-    background-color: #574c3a !important;
-    border-color: #574c3a !important;
+    background-color: #725720 !important;
+    border-color: #3b2e19 !important;
+    border-radius: 20px !important;
+    width: 100px;
 }
 #login .container #login-row #login-column #login-box {
     margin-top: 120px;
@@ -96,7 +114,7 @@ a {
 }
 .btn-primary {
     color: #fff;
-    background-color: #423211;
+    background-color: #725720;
     border-color: #423211;
     border-radius: 20px;
 }

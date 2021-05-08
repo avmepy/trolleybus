@@ -2,57 +2,62 @@
 {% load auth_extras %}
 
 {% block title %}
-    Reports
+    Звіти
 {% endblock title %}
 
 {% block context %}
 
-    <form action="{% url 'reports' %}" method="post">
+    <div class="mlr-6p mt-15 justify-content-start mw-500">
 
-        {% csrf_token %}
+        <form action="{% url 'reports' %}" method="post">
 
-        {% if request.user|has_group:"Водій" %}
+            {% csrf_token %}
 
-            <label for="reportType">Оберіть звіт</label>
+            {% if request.user|has_group:"Водій" %}
+                <label for="reportType" class="color-white">Оберіть звіт</label>
+                <select class="form-select br-20 bg-beige" aria-label="Default select example" id="reportType" name="report">
+                    <option selected value="hours">Відпрацьовані години</option>
+                    <option value="kzot">Обмеження згідно з КЗОТ</option>
+                </select>
+            {% endif %}
 
-            <select class="form-select" aria-label="Default select example" id="reportType" name="report">
-                <option selected value="hours">Відпрацьовані години</option>
-                <option value="kzot">Обмеження згідно з КЗОТ</option>
-            </select>
+            {% if request.user|has_group:"Керівник" %}
+                <label for="reportType" class="color-white">Оберіть звіт</label>
+                <select class="form-select br-20 bg-beige" aria-label="Default select example" id="reportType" name="report">
+                    <option selected value="drivers_dest" class="br-20">Призначення водіїв</option>
+                    <option value="hours" class="br-20">Відпрацьовані години</option>
+                    <option value="kzot" class="br-20">Обмеження згідно з КЗОТ</option>
+                </select>
+                <br>
+                <label for="driver" class="color-white">Оберіть водія</label>
+                <select class="form-select br-20 bg-beige" aria-label="Default select example" id="driver" name="driver">
+                    <option selected value="all_drivers">Усі водії</option>
+                    {% for driver in drivers %}
+                        <option value="{{ driver.id }}">{{ driver.get_full_name }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+            <br>
+            <text class="color-white">Оберіть проміжок часу</text>
 
-        {% endif %}
-
+            <div class="row">
+                <div class="col">
+                    <input type="date" class="br-20 bg-beige h-38 w-100p" name="from">
+                </div>
+                <div class="col">
+                    <input type="date" class="br-20 bg-beige h-38 w-100p" name="to">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary col w-100p mt-15" value="Завантажити">
+        </form>
+        <hr class="color-white">
         {% if request.user|has_group:"Керівник" %}
-
-            <label for="reportType">Оберіть звіт</label>
-            <select class="form-select" aria-label="Default select example" id="reportType" name="report">
-                <option selected value="drivers_dest">Призначення водіїв</option>
-                <option value="hours">Відпрацьовані години</option>
-                <option value="kzot">Обмеження згідно з КЗОТ</option>
-            </select>
-
-            <label for="driver">Оберіть водія</label>
-            <select class="form-select" aria-label="Default select example" id="driver" name="driver">
-                <option selected value="all_drivers">Усі водії</option>
-
-                {% for driver in drivers %}
-                    <option value="{{ driver.id }}">{{ driver.get_full_name }}</option>
+            <a class="btn btn-primary w-100p" href="{% url 'generate_shifts' %}">Згенерувати розклад на наступний тиждень</a>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} mt-15" role="alert">{{ message }}</div>
                 {% endfor %}
-
-
-            </select>
-
+            {% endif %}
         {% endif %}
-
-        <p>Оберіть проміжок часу</p>
-        <input type="date" name="from">
-        <input type="date" name="to">
-        <input type="submit" value="Завантажити">
-
-    </form>
-
-
-    {{ report }}
-
-
+    </div>
 {% endblock context %}
