@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
@@ -43,7 +44,14 @@ class ReportView(View):
         }
 
         if report == 'hours':
-            wb = reports.report_worked_hours(self.request.user, date_from, date_to)
+            if self.request.user.groups.filter(name='Водій').exists():
+                wb = reports.report_worked_hours(self.request.user, date_from, date_to)
+            else:
+                driver = self.request.POST.get('driver')
+                if driver == 'all_drivers':
+                    wb = reports.report_worked_hours_all_drivers(date_from, date_to)
+                else:
+                    wb = reports.report_worked_hours(User.objects.get(id=int(driver)), date_from, date_to)
             return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
 
         return render(self.request, 'routes/reports.html', context=context)
