@@ -1,7 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 from accounts.forms import UserLoginForm
 from accounts import services
+from trolleybus2.settings import LOGIN_URL
 
 
 class LoginView(View):
@@ -20,13 +22,15 @@ class LoginView(View):
         return render(self.request, 'accounts/login.html', {'form': UserLoginForm})
 
 
-class LogoutView(View):
+class LogoutView(LoginRequiredMixin, View):
+    login_url = LOGIN_URL
 
     def get(self, request):
         return services.logout_user(self.request)
 
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
+    login_url = LOGIN_URL
 
     def get(self):
 
