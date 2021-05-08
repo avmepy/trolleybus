@@ -6,6 +6,7 @@ from routes import services
 from accounts.services import get_drivers
 from routes import reports
 from openpyxl.writer.excel import save_virtual_workbook
+from django.utils import timezone
 
 
 class HomeView(View):
@@ -35,10 +36,14 @@ class ReportView(View):
         return render(self.request, 'routes/reports.html', context=context)
 
     def post(self, request):
-
+        default = timezone.datetime.now().strftime('%Y-%m-%d')
         report = self.request.POST.get('report')
-        date_from = self.request.POST.get('from')
-        date_to = self.request.POST.get('to')
+        date_from = request.POST.get('from')
+        date_to = request.POST.get('to')
+
+        date_from = default if not date_from else date_from
+        date_to = default if not date_to else date_to
+
         context = {
             'drivers': get_drivers()
         }
@@ -54,5 +59,20 @@ class ReportView(View):
                     wb = reports.report_worked_hours(User.objects.get(id=int(driver)), date_from, date_to)
             return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
 
-        return render(self.request, 'routes/reports.html', context=context)
+        if report == 'drivers_dest':
+            wb = reports.report_drivers_dest(date_from, date_to)
+            return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
 
+        if report == 'kzot':
+            if self.request.user.groups.filter(name='Водій').exists():
+                wb = reports.report_kzot(self.request.user, date_from, date_to)
+                return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
+            else:
+                driver = self.request.POST.get('driver')
+                if driver == 'all_drivers':
+                    wb = reports.report_kzot_all_drivers(date_from, date_to)
+                else:
+                    wb = reports.report_kzot_all_drivers(User.objects.get(id=int(driver)), date_from, date_to)
+                return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
+
+        return render(self.request, 'routes/reports.html', context=context)
