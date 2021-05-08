@@ -72,7 +72,7 @@ class ReportView(View):
                 if driver == 'all_drivers':
                     wb = reports.report_kzot_all_drivers(date_from, date_to)
                 else:
-                    wb = reports.report_kzot_all_drivers(User.objects.get(id=int(driver)), date_from, date_to)
+                    wb = reports.report_kzot(User.objects.get(id=int(driver)), date_from, date_to)
                 return HttpResponse(save_virtual_workbook(wb), content_type='application/vnd.ms-excel')
 
         return render(self.request, 'routes/reports.html', context=context)
