@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f@7sbvvqbv@87^aclkzw5h6y01+4k)$5$twd!@7lc9!&b=a7%0'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'trolleybus-mmf.herokuapp.com'
